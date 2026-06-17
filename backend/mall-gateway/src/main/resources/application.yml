@@ -1,0 +1,95 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: mall-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+      routes:
+        - id: mall-auth
+          uri: lb://mall-auth
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - StripPrefix=1
+
+        - id: mall-user
+          uri: lb://mall-user
+          predicates:
+            - Path=/api/users/**,/api/merchant/register
+          filters:
+            - StripPrefix=1
+
+        - id: mall-product
+          uri: lb://mall-product
+          predicates:
+            - Path=/api/products/**,/api/merchant/products/**
+          filters:
+            - StripPrefix=1
+
+        - id: mall-search
+          uri: lb://mall-search
+          predicates:
+            - Path=/api/search/**
+          filters:
+            - StripPrefix=1
+
+        - id: mall-cart
+          uri: lb://mall-cart
+          predicates:
+            - Path=/api/cart/**
+          filters:
+            - StripPrefix=1
+
+        - id: mall-order
+          uri: lb://mall-order
+          predicates:
+            - Path=/api/orders/**,/api/merchant/orders/**,/api/merchant/refunds/**
+          filters:
+            - StripPrefix=1
+
+        - id: mall-payment
+          uri: lb://mall-payment
+          predicates:
+            - Path=/api/payment/**
+          filters:
+            - StripPrefix=1
+
+        - id: mall-seckill
+          uri: lb://mall-seckill
+          predicates:
+            - Path=/api/seckill/**
+          filters:
+            - StripPrefix=1
+
+        - id: mall-recommend
+          uri: lb://mall-recommend
+          predicates:
+            - Path=/api/recommend/**
+          filters:
+            - StripPrefix=1
+
+        - id: mall-notification
+          uri: lb://mall-notification
+          predicates:
+            - Path=/api/notifications/**
+          filters:
+            - StripPrefix=1
+
+        - id: mall-admin
+          uri: lb://mall-admin
+          predicates:
+            - Path=/api/admin/**
+          filters:
+            - StripPrefix=1
+
+mall:
+  jwt:
+    secret: ${JWT_SECRET:mall-jwt-secret-key-for-dev-only-change-in-production-min-256-bits!!}

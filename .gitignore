@@ -1,0 +1,44 @@
+# Java
+target/
+*.class
+*.jar
+*.war
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Maven
+.mvn/
+*.iml
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Node.js
+node_modules/
+dist/
+*.log
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.secret.yaml
+
+# Redis dump
+dump.rdb
+
+# Elasticsearch data
+data/
+
+# Specs - keep templates and specs
+!.specify/

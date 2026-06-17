@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: mall-gateway
+  cloud:
+    nacos:
+      config:
+        server-addr: localhost:8848
+        namespace: mall-dev
+        file-extension: yaml
