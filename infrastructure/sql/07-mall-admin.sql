@@ -15,6 +15,18 @@ CREATE TABLE admin (
     UNIQUE KEY uk_username (username)
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE audit_log (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    target_type VARCHAR(30) NOT NULL,
+    target_id BIGINT NOT NULL,
+    admin_id BIGINT NOT NULL,
+    action VARCHAR(20) NOT NULL,
+    reason VARCHAR(500),
+    created_at DATETIME NOT NULL,
+    KEY idx_target (target_type, target_id),
+    KEY idx_admin (admin_id)
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 INSERT INTO admin (username, password_hash, real_name, role, permissions, status, created_at)
 VALUES (
     'admin',
